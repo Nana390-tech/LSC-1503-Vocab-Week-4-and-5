@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LSC 1503 Weeks 4 and 5: Reflect, Give Feedback, Listen</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:#EEF8F3}
+body{font-family:"Segoe UI","Trebuchet MS",Tahoma,Arial,sans-serif;color:#12332D;line-height:1.55;font-size:17px}
+button{font-family:inherit;font-size:inherit;cursor:pointer}
+button:focus,input:focus{outline:3px solid #FFC84A;outline-offset:2px}
+.wrap{max-width:860px;margin:0 auto;padding:0 18px}
+.hidden{display:none !important}
+
+/* error box */
+#jsError{background:#FFE3DE;border:2px solid #F25C45;color:#7A1E10;padding:14px 18px;margin:14px auto;max-width:820px;border-radius:10px;font-weight:600}
+
+/* header / hero */
+.hero{background:#0B5E4E;color:#fff;padding:26px 0 30px;border-bottom:8px solid #F25C45}
+.course{font-size:14px;color:#BFEBDD;margin-bottom:4px}
+.hero h1{font-family:"Trebuchet MS","Segoe UI",sans-serif;font-size:34px;line-height:1.15;font-weight:800;letter-spacing:-0.5px}
+.hero .sub{color:#D8F3EA;margin-top:6px;font-size:16px;max-width:620px}
+.stressBox{margin-top:22px;background:#0E7C66;border-radius:14px;padding:18px 18px 16px}
+.stressBox .inst{font-size:15px;color:#D8F3EA;margin-bottom:10px}
+.sentence{display:block;line-height:1.9}
+.sw{background:transparent;border:0;color:#fff;font-size:26px;font-weight:600;padding:2px 6px;border-radius:8px;margin:0 1px;transition:all .18s}
+.sw:hover{background:#0B5E4E}
+.sw.on{background:#FFC84A;color:#12332D;font-size:34px;font-weight:900}
+.meaning{margin-top:10px;background:#EEF8F3;color:#12332D;border-radius:10px;padding:10px 14px;font-size:16px;min-height:46px}
+.meaning b{color:#C23A25}
+
+/* start card */
+.card{background:#fff;border-radius:16px;padding:22px;margin:22px 0;border:2px solid #CFEBDF}
+.card h2{font-size:22px;margin-bottom:6px;color:#0B5E4E}
+.row{display:flex;flex-wrap:wrap;gap:12px;margin-top:12px}
+.field{flex:1 1 220px}
+.field label{display:block;font-size:14px;font-weight:700;margin-bottom:4px}
+.field input{width:100%;padding:11px 12px;border:2px solid #9FD6C4;border-radius:10px;font-size:17px;font-family:inherit}
+.btn{border:0;border-radius:12px;padding:13px 22px;font-weight:800;font-size:17px}
+.btn.main{background:#F25C45;color:#fff}
+.btn.main:hover{background:#D9442E}
+.btn.alt{background:#0E7C66;color:#fff}
+.btn.alt:hover{background:#0B5E4E}
+.btn.ghost{background:#E1F3EC;color:#0B5E4E}
+.btn[disabled]{opacity:.45;cursor:default}
+.warn{color:#C23A25;font-weight:700;font-size:15px;margin-top:8px}
+.facts{margin-top:14px;font-size:15px;color:#3C5F57}
+.facts span{display:inline-block;background:#E1F3EC;border-radius:20px;padding:4px 12px;margin:3px 6px 3px 0}
+
+/* glossary */
+.chips{margin:6px 0 14px}
+.chip{border:2px solid #0E7C66;background:#fff;color:#0B5E4E;border-radius:20px;padding:6px 14px;font-size:15px;font-weight:700;margin:4px 6px 4px 0}
+.chip.on{background:#0E7C66;color:#fff}
+.grid{display:flex;flex-wrap:wrap;margin:0 -7px}
+.fc{width:50%;padding:7px}
+@media (max-width:620px){.fc{width:100%}}
+.fcIn{width:100%;min-height:150px;border-radius:14px;border:0;text-align:left;padding:16px;display:block;position:relative;box-shadow:0 3px 0 #9FD6C4}
+.fcIn.front{background:#fff;color:#12332D;border:2px solid #CFEBDF}
+.fcIn.back{background:#0B5E4E;color:#fff}
+.term{font-size:21px;font-weight:800;display:block}
+.pos{display:inline-block;font-size:13px;background:#FFF1CC;color:#7A5200;border-radius:6px;padding:1px 8px;margin-top:6px}
+.wk{position:absolute;top:12px;right:12px;font-size:12px;font-weight:700;color:#0E7C66}
+.tapNote{display:block;font-size:13px;color:#6A8C84;margin-top:14px}
+.def{display:block;font-size:16px}
+.ar{display:block;direction:rtl;text-align:right;font-family:"Segoe UI",Tahoma,"Geeza Pro","Arial",sans-serif;font-size:18px;margin-top:10px;padding-top:10px;border-top:1px dashed #5FB59C;color:#FFE7A3}
+.ar b{color:#fff}
+
+/* quiz */
+.qtop{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px;margin-top:20px}
+.pill{background:#fff;border:2px solid #CFEBDF;border-radius:20px;padding:5px 14px;font-weight:700;font-size:15px}
+.pill.score{border-color:#F25C45;color:#C23A25}
+.pill.streak{border-color:#FFC84A;color:#7A5200}
+.bar{height:12px;background:#D5EDE4;border-radius:10px;margin-top:12px;overflow:hidden}
+.bar div{height:100%;background:#F25C45;width:0;transition:width .3s}
+.cat{display:inline-block;font-size:14px;font-weight:800;color:#fff;border-radius:8px;padding:3px 10px;margin-bottom:10px}
+.c-reflect{background:#0E7C66}.c-speak{background:#2F6FB5}.c-feedback{background:#F25C45}.c-listen{background:#8A4FB0}.c-stress{background:#C98A00}
+.qtext{font-size:19px;font-weight:600;margin-bottom:14px}
+.opt{display:block;width:100%;text-align:left;background:#F6FBF9;border:2px solid #CFEBDF;border-radius:12px;padding:12px 14px;margin:8px 0;color:#12332D}
+.opt:hover{border-color:#0E7C66}
+.opt .let{display:inline-block;width:28px;height:28px;line-height:28px;text-align:center;border-radius:50%;background:#E1F3EC;font-weight:800;margin-right:10px;color:#0B5E4E}
+.opt.right{background:#DDF6E8;border-color:#1E9E62}
+.opt.right .let{background:#1E9E62;color:#fff}
+.opt.wrong{background:#FFE3DE;border-color:#F25C45}
+.opt.wrong .let{background:#F25C45;color:#fff}
+.opt.locked{cursor:default}
+.hintBox{background:#FFF6DB;border-left:6px solid #FFC84A;padding:10px 14px;border-radius:8px;margin-top:10px;font-size:16px}
+.fb{margin-top:12px;border-radius:10px;padding:12px 14px;font-size:16px}
+.fb.good{background:#DDF6E8;border-left:6px solid #1E9E62}
+.fb.bad{background:#FFE3DE;border-left:6px solid #F25C45}
+.nav{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-top:16px}
+.review{font-size:14px;color:#6A8C84;margin-top:8px;font-weight:600}
+
+/* results */
+.big{font-size:52px;font-weight:900;color:#0B5E4E;line-height:1}
+.badges{display:flex;flex-wrap:wrap;margin:10px -6px}
+.badge{width:33.33%;padding:6px}
+@media (max-width:620px){.badge{width:50%}}
+.bIn{border-radius:14px;padding:12px;text-align:center;border:2px dashed #CFEBDF;background:#fff;color:#9BB5AE;height:100%}
+.bIn.got{border:2px solid #FFC84A;background:#FFF6DB;color:#12332D}
+.bIn .ic{font-size:30px;display:block}
+.bIn b{display:block;font-size:15px}
+.bIn small{font-size:13px}
+.cert{border:6px double #0E7C66;background:#fff;border-radius:6px;padding:28px 22px;text-align:center;margin:18px 0}
+.cert h3{font-family:Georgia,"Times New Roman",serif;font-size:30px;color:#0B5E4E}
+.cert .nm{font-family:Georgia,"Times New Roman",serif;font-size:32px;color:#C23A25;border-bottom:2px solid #FFC84A;display:inline-block;padding:0 20px 4px;margin:10px 0}
+.cert p{margin:6px 0}
+.cert .by{font-size:14px;color:#3C5F57;margin-top:16px}
+textarea#jsonOut{width:100%;height:160px;font-family:Consolas,monospace;font-size:13px;margin-top:10px;border:2px solid #9FD6C4;border-radius:10px;padding:8px}
+.foot{text-align:center;color:#3C5F57;font-size:14px;padding:26px 0 34px}
+#confetti{position:fixed;left:0;top:0;width:100%;height:100%;pointer-events:none;z-index:50}
+
+@media print{
+  body *{visibility:hidden}
+  #certBox,#certBox *{visibility:visible}
+  #certBox{position:absolute;left:0;top:0;width:100%;margin:0}
+}
+@media (prefers-reduced-motion:reduce){.sw,.bar div{transition:none}}
+</style>
+</head>
+<body>
+
+<div id="jsError">If you can read this box, the app did not load. Please open this page in Chrome or Safari (not inside Teams or email), then refresh.</div>
+
+<header class="hero">
+ <div class="wrap">
+  <div class="course">LSC 1503 Professional Spoken Communication, Unit 1 Key Language, Weeks 4 and 5</div>
+  <h1>Reflect. Give feedback. Listen.</h1>
+  <p class="sub">25 workplace and classroom situations to check the key words for self-reflection, peer feedback, active listening and sentence stress.</p>
+  <div class="stressBox">
+   <p class="inst">Sentence stress changes meaning. Tap a word to stress it.</p>
+   <div class="sentence" id="sentence"></div>
+   <div class="meaning" id="meaning">Tap any word above and see what the speaker really means.</div>
+  </div>
+ </div>
+</header>
+
+<main class="wrap">
+
+<!-- START -->
+<section id="scrStart">
+ <div class="card">
+  <h2>Before you start</h2>
+  <p>Write your name. It goes on your certificate and your results file.</p>
+  <div class="row">
+   <div class="field"><label for="stName">Full name</label><input id="stName" type="text" autocomplete="name"></div>
+   <div class="field"><label for="stId">Student ID</label><input id="stId" type="text"></div>
+  </div>
+  <p class="warn hidden" id="nameWarn">Please write your name first.</p>
+  <div class="row">
+   <button class="btn alt" id="goGloss">Study the words</button>
+   <button class="btn main" id="goQuiz">Start the quiz</button>
+  </div>
+  <div class="facts">
+   <span>25 questions</span><span>10 points each</span><span>A hint costs 5 points</span><span>200 points (80%) for a certificate</span>
+  </div>
+ </div>
+</section>
+
+<!-- GLOSSARY -->
+<section id="scrGloss" class="hidden">
+ <div class="card">
+  <h2>Key words glossary</h2>
+  <p>Tap a card to see the meaning and the Arabic. Tap again to turn it back.</p>
+  <div class="chips" id="chips"></div>
+  <div class="grid" id="grid"></div>
+  <div class="row"><button class="btn ghost" id="glossBack">Back</button><button class="btn main" id="glossQuiz">Start the quiz</button></div>
+ </div>
+</section>
+
+<!-- QUIZ -->
+<section id="scrQuiz" class="hidden">
+ <div class="qtop">
+  <span class="pill" id="qNum">Question 1 of 25</span>
+  <span><span class="pill streak" id="streak">Streak 0</span> <span class="pill score" id="score">0 points</span></span>
+ </div>
+ <div class="bar"><div id="barFill"></div></div>
+ <div class="card">
+  <span class="cat" id="qCat"></span>
+  <p class="qtext" id="qText"></p>
+  <div id="opts"></div>
+  <div class="hintBox hidden" id="hintBox"></div>
+  <div id="fb"></div>
+  <p class="review hidden" id="reviewNote">You already answered this question. It is locked.</p>
+  <div class="nav">
+   <button class="btn ghost" id="prevBtn">Previous</button>
+   <button class="btn alt" id="hintBtn">Show a hint (−5)</button>
+   <button class="btn main" id="nextBtn" disabled>Next</button>
+  </div>
+ </div>
+</section>
+
+<!-- RESULTS -->
+<section id="scrRes" class="hidden">
+ <div class="card">
+  <h2 id="resTitle">Your results</h2>
+  <p class="big" id="resPct">0%</p>
+  <p id="resLine"></p>
+  <h2 style="margin-top:18px">Badges</h2>
+  <div class="badges" id="badges"></div>
+ </div>
+ <div class="cert hidden" id="certBox">
+  <h3>Certificate of Achievement</h3>
+  <p>This certifies that</p>
+  <div class="nm" id="certName"></div>
+  <p>completed the LSC 1503 Unit 1 Key Language quiz for Weeks 4 and 5:<br>Self-Reflection, Peer Feedback, Active Listening and Sentence Stress</p>
+  <p><b id="certScore"></b></p>
+  <p id="certDate"></p>
+  <p class="by">Designed by: Nazila Motahari</p>
+ </div>
+ <div class="card">
+  <div class="row">
+   <button class="btn main" id="dlBtn">Download my results</button>
+   <button class="btn alt hidden" id="printBtn">Print certificate</button>
+   <button class="btn ghost" id="reviewBtn">Review my answers</button>
+   <button class="btn ghost" id="retryBtn">Try again</button>
+  </div>
+  <div id="jsonWrap" class="hidden">
+   <p style="margin-top:12px;font-size:15px">If the download did not start, copy this text and send it to your teacher.</p>
+   <textarea id="jsonOut" readonly></textarea>
+  </div>
+ </div>
+</section>
+
+</main>
+<footer class="foot">Designed by: Nazila Motahari</footer>
+<canvas id="confetti"></canvas>
+
+<script>
+/* ============ DATA ============ */
+var STRESS = [
+ {w:"I", m:"<b>Someone else</b> said it. It was not me."},
+ {w:"didn't", m:"I <b>never</b> said that. I strongly deny it."},
+ {w:"say", m:"Maybe I hinted it, but I did not <b>say</b> it."},
+ {w:"you", m:"I said someone took it, but not <b>you</b>."},
+ {w:"took", m:"Maybe you borrowed it. You did not <b>take</b> it."},
+ {w:"my", m:"You took a car, but not <b>my</b> car."},
+ {w:"car.", m:"You took something of mine, but not my <b>car</b>."}
+];
+
+var GROUPS = [
+ {k:"all", n:"All words"},
+ {k:"reflect", n:"Self-reflection"},
+ {k:"speak", n:"Speaking skills"},
+ {k:"feedback", n:"Peer feedback"},
+ {k:"listen", n:"Listening"},
+ {k:"stress", n:"Sentence stress"}
+];
+
+var TERMS = [
+ {t:"Self-reflection", p:"noun", g:"reflect", w:"Week 4", d:"The ability to think, understand, and talk about yourself as a person and a learner.", at:"التأمل الذاتي", ad:"القدرة على التفكير والفهم والتحدث عن نفسك كشخص وكمتعلم."},
+ {t:"WHAT?", p:"stage 1 of self-reflection", g:"reflect", w:"Week 4", d:"Recognizing our strengths and identifying areas for improvement.", at:"ماذا؟", ad:"التعرف على نقاط قوتنا وتحديد المجالات التي تحتاج إلى تحسين."},
+ {t:"SO WHAT?", p:"stage 2 of self-reflection", g:"reflect", w:"Week 4", d:"Measuring our strengths and areas for development.", at:"إذًا ماذا؟", ad:"قياس نقاط قوتنا والمجالات التي تحتاج إلى تطوير."},
+ {t:"NOW WHAT?", p:"stage 3 of self-reflection", g:"reflect", w:"Week 4", d:"Developing and naming small, manageable goals to improve or change.", at:"ماذا بعد؟", ad:"تطوير وتحديد أهداف صغيرة وقابلة للتحقيق من أجل التحسين أو التغيير."},
+ {t:"Accuracy / to be accurate", p:"noun / adjective", g:"speak", w:"Week 4", d:"In your speaking, how correct your language is; how few mistakes you make.", at:"الدقة / أن تكون دقيقًا", ad:"مدى صحة لغتك عند التحدث، ومدى قلة الأخطاء التي ترتكبها."},
+ {t:"Fluency / to be fluent", p:"noun / adjective", g:"speak", w:"Week 4", d:"The flow of your speaking: how natural it sounds, and how few long pauses, ummms and ahhhs you make.", at:"الطلاقة / أن تكون طليقًا", ad:"مدى انسيابية حديثك ومدى طبيعيته، ومدى قلة التوقفات الطويلة أو التردد مثل «آه» و«أم»."},
+ {t:"Hesitation / to hesitate", p:"noun / verb", g:"speak", w:"Week 4", d:"Nervous pausing before saying or doing something. A long hesitation may make you seem less confident. Tip: a pause that looks planned can make you seem more confident!", at:"التردد / أن تتردد", ad:"التوقف العصبي قبل قول شيء أو القيام بشيء. عند التحدث، قد يجعلك التردد الطويل تبدو أقل ثقة."},
+ {t:"Peer", p:"noun", g:"feedback", w:"Week 5", d:"A person at the same level as you, for example a classmate.", at:"الزميل / النظير", ad:"شخص في نفس مستواك، مثل زميل الدراسة."},
+ {t:"Peer feedback", p:"noun", g:"feedback", w:"Week 5", d:"Constructive feedback from your classmates: students give one another feedback on their work or performance.", at:"تغذية راجعة من الزملاء", ad:"ملاحظات بنّاءة يقدّمها الطلاب لبعضهم البعض حول عملهم أو أدائهم."},
+ {t:"Constructive", p:"adjective", g:"feedback", w:"Week 5", d:"Positive but honest; giving helpful and realistic ideas or advice to improve something.", at:"بنّاء", ad:"إيجابي لكن صادق؛ تقديم أفكار أو نصائح مفيدة وواقعية لتحسين شيء ما."},
+ {t:"Encouraging", p:"adjective", g:"feedback", w:"Week 5", d:"Making someone feel motivated through positivity.", at:"مُشجِّع", ad:"جعل شخص ما يشعر بالحماس والدافع من خلال الإيجابية."},
+ {t:"Specific", p:"adjective", g:"feedback", w:"Week 5", d:"Giving clear and exact details.", at:"محدَّد", ad:"تقديم تفاصيل واضحة ودقيقة."},
+ {t:"Objective", p:"adjective", g:"feedback", w:"Week 5", d:"Giving your feedback based on facts, not personal feelings or opinions.", at:"موضوعي", ad:"تقديم ملاحظاتك بناءً على الحقائق، وليس على المشاعر أو الآراء الشخصية."},
+ {t:"Active", p:"adjective", g:"listen", w:"Week 5", d:"The opposite of passive: doing something, being busy, or moving.", at:"نشِط / فعّال", ad:"عكس السلبي: القيام بشيء، أو الانشغال، أو الحركة."},
+ {t:"Passive", p:"adjective", g:"listen", w:"Week 5", d:"The opposite of active: not doing anything, or letting things happen without trying to change them.", at:"سلبي", ad:"عكس النشِط: عدم القيام بأي شيء، أو ترك الأمور تحدث دون محاولة تغييرها."},
+ {t:"Active listening", p:"noun", g:"listen", w:"Week 5", d:"Listening with purpose and attention: listening carefully, asking questions, and showing that you are interested.", at:"الاستماع الفعّال", ad:"الاستماع بهدف وانتباه: الإنصات بعناية، وطرح الأسئلة، وإظهار أنك مهتم."},
+ {t:"Passive listening", p:"noun", g:"listen", w:"Week 5", d:"Hearing without paying much attention, or listening without showing interest or joining the conversation.", at:"الاستماع السلبي", ad:"السماع دون انتباه كبير، أو الاستماع دون إظهار اهتمام أو المشاركة في الحديث."},
+ {t:"Distracted", p:"adjective", g:"listen", w:"Week 5", d:"Not concentrating; not paying attention.", at:"مشتَّت الانتباه", ad:"غير مركّز؛ لا ينتبه."},
+ {t:"Engaged / Disengaged", p:"adjectives", g:"listen", w:"Week 5", d:"Interested and involved / uninterested and uninvolved.", at:"منخرط / غير منخرط", ad:"مهتم ومشارك / غير مهتم وغير مشارك."},
+ {t:"To clarify", p:"verb", g:"listen", w:"Week 5", d:"To make something clear.", at:"يوضّح", ad:"أن تجعل الشيء واضحًا."},
+ {t:"Sentence stress", p:"noun", g:"stress", w:"Week 5", d:"The emphasis on certain words in a sentence. It shows meaning, emotion and intent. Content words are often stressed; grammar words are often unstressed, but the rules can change.", at:"نبر الجملة", ad:"التركيز على كلمات معيّنة في الجملة لإيصال المعنى والمشاعر والقصد."},
+ {t:"Emphasis / to emphasize", p:"noun / verb", g:"stress", w:"Week 5", d:"Focus / to focus on; to show how important something is.", at:"التأكيد / يؤكّد", ad:"التركيز على شيء، وإظهار مدى أهميته."}
+];
+
+var CATS = {
+ reflect:{n:"Self-reflection", badge:"Mirror Master", ic:"🪞"},
+ speak:{n:"Speaking skills", badge:"Smooth Speaker", ic:"🎙️"},
+ feedback:{n:"Peer feedback", badge:"Feedback Friend", ic:"🤝"},
+ listen:{n:"Listening", badge:"Super Listener", ic:"👂"},
+ stress:{n:"Sentence stress", badge:"Stress Star", ic:"⭐"}
+};
+
+var QS = [
+ {c:"reflect", q:"After her first presentation, Amna writes in her journal: \"I spoke clearly, but I looked at my notes too much. Next time I will practise more.\" What is Amna doing?",
+  o:["Giving peer feedback","Self-reflection","Passive listening","Using sentence stress"], a:1,
+  h:"She is thinking and writing about herself as a learner.",
+  e:"Self-reflection is thinking, understanding and talking about yourself as a person and a learner. Amna looks at her own performance."},
+ {c:"reflect", q:"The teacher asks Khalid, \"What went well, and what needs work?\" Khalid answers, \"My eye contact was good, but I spoke too fast.\" Which stage of self-reflection is this?",
+  o:["NOW WHAT?","SO WHAT?","WHAT?","Peer feedback"], a:2,
+  h:"He is only naming a strength and an area to improve. He is not measuring it or making a plan yet.",
+  e:"WHAT? is the first stage: recognizing strengths and identifying areas for improvement."},
+ {c:"reflect", q:"Mariam listens to her recording and says, \"Speaking too fast is a big problem, because the audience missed my main points. My eye contact is a strong point I can use more.\" Which stage is this?",
+  o:["SO WHAT?","WHAT?","NOW WHAT?","Hesitation"], a:0,
+  h:"She is deciding how big or important her strength and her problem are.",
+  e:"SO WHAT? means measuring our strengths and areas for development: how much do they matter, and why?"},
+ {c:"reflect", q:"Saeed writes, \"Next week, I will pause for two seconds after each main point.\" Which stage of self-reflection is this?",
+  o:["WHAT?","SO WHAT?","Objective feedback","NOW WHAT?"], a:3,
+  h:"He is looking forward and making a plan.",
+  e:"NOW WHAT? means developing and naming small, manageable goals to improve or change."},
+ {c:"reflect", q:"Which goal is best for the NOW WHAT? stage?",
+  o:["I will be a perfect speaker by next week.","I will practise my two-minute talk aloud three times before Thursday.","I will learn all of English grammar this month.","I will never feel nervous in front of people again."], a:1,
+  h:"Look for a goal that is small and manageable.",
+  e:"Good NOW WHAT? goals are small and manageable. Practising three times before Thursday is clear and possible. The others are too big."},
+
+ {c:"speak", q:"Hamad speaks slowly, but every sentence is correct. He makes no grammar mistakes and uses the right words. What is his strength?",
+  o:["Fluency","Hesitation","Accuracy","Emphasis"], a:2,
+  h:"Think about correct language and few mistakes.",
+  e:"Accuracy is how correct your language is and how few mistakes you make. Hamad is accurate, but he could work on fluency."},
+ {c:"speak", q:"Noora makes a few small grammar mistakes, but she speaks smoothly and naturally, with almost no long pauses. What is her strength?",
+  o:["Fluency","Accuracy","Passive listening","Objectivity"], a:0,
+  h:"Think about the flow of her speaking.",
+  e:"Fluency is the flow of your speaking: how natural it sounds and how few long pauses, ummms and ahhhs you make."},
+ {c:"speak", q:"In a job interview, Rashid says \"Ummm... ahhh... ummm...\" for ten seconds before every answer. What is he showing, and how may it make him seem?",
+  o:["Fluency. It may make him seem more natural.","Accuracy. It may make him seem more correct.","Emphasis. It may make him seem more important.","Hesitation. It may make him seem less confident."], a:3,
+  h:"Long, nervous pauses before speaking have a name.",
+  e:"Hesitation is nervous pausing before saying or doing something. A long hesitation may make you seem less confident."},
+ {c:"speak", q:"In the middle of her talk, Fatima needs a second to remember her next point. What should she do to still look confident?",
+  o:["Say \"ummm\" until she remembers","Make a calm pause and look at the audience, as if it is on purpose","Speak very fast to fill the silence","Say sorry and stop the talk"], a:1,
+  h:"Your Key Language sheet has a tip about pauses that look planned.",
+  e:"If you make a pause look like it is on purpose, it can make you seem more confident, not less."},
+ {c:"speak", q:"Choose the correct sentence.",
+  o:["I want to be more fluency.","My fluent is getting better.","I want to be more fluent.","I want to fluency more."], a:2,
+  h:"After \"to be\" we need an adjective. Fluency is the noun.",
+  e:"Fluent is the adjective (to be fluent). Fluency is the noun: \"My fluency is getting better.\""},
+
+ {c:"feedback", q:"Which person is a peer for an HCT student in LSC 1503?",
+  o:["The course teacher","A classmate in the same section","The college director","A future manager at work"], a:1,
+  h:"A peer is at the same level as you.",
+  e:"A peer is a person at the same level as you, for example a classmate."},
+ {c:"feedback", q:"After Latifa's practice talk, her classmate Shamma tells her one thing she did well and one thing to improve. What is this?",
+  o:["Peer feedback","Self-reflection","Passive listening","Hesitation"], a:0,
+  h:"The comments come from a classmate, not from Latifa herself.",
+  e:"Peer feedback is when students give one another feedback on their work or performance."},
+ {c:"feedback", q:"Which comment is the most constructive?",
+  o:["It was bad, and honestly I did not enjoy it at all.","It was perfect, so do not change anything next time.","You should choose a completely different topic next time.","Your opening was strong. Try slowing down in the middle."], a:3,
+  h:"Constructive means positive but honest, with helpful and realistic advice.",
+  e:"Constructive feedback is positive but honest. It says what worked and gives a helpful, realistic idea to improve."},
+ {c:"feedback", q:"Ali is nervous before he presents. His friend says, \"You practised a lot. You are ready. You can do this!\" How is his friend being?",
+  o:["Objective","Distracted","Encouraging","Specific"], a:2,
+  h:"His friend wants Ali to feel motivated.",
+  e:"Encouraging means making someone feel motivated through positivity."},
+ {c:"feedback", q:"Which feedback is the most specific?",
+  o:["You looked at all three tables, and your last sentence was loud and clear.","Your talk was nice, and I think everyone enjoyed it a lot.","It was fine, but some parts could be a little bit better.","Well done, that was really good. Keep going like that."], a:0,
+  h:"Which one gives clear and exact details?",
+  e:"Specific feedback gives clear and exact details, so the speaker knows exactly what worked."},
+ {c:"feedback", q:"Which feedback is objective?",
+  o:["I do not like the sound of your voice.","Your topic is boring to me.","You said \"ummm\" eight times in two minutes.","I prefer my friend's talk to yours."], a:2,
+  h:"Look for facts, not feelings or opinions.",
+  e:"Objective feedback is based on facts, not personal feelings or opinions. Counting the ummms is a fact."},
+
+ {c:"listen", q:"In a team meeting, Sultan nods, asks \"Can you give an example?\" and repeats the main point to check it. What is Sultan doing?",
+  o:["Passive listening","Active listening","Hesitating","Self-reflection"], a:1,
+  h:"He listens carefully, asks questions and shows interest.",
+  e:"Active listening is listening with purpose and attention: listening carefully, asking questions, and showing you are interested."},
+ {c:"listen", q:"In a group discussion, Hessa can hear everyone, but she does not ask anything, show interest, or add her ideas. What is she doing?",
+  o:["Active listening","Clarifying","Passive listening","Emphasizing"], a:2,
+  h:"She hears, but she does not join the conversation.",
+  e:"Passive listening is hearing without much attention, or listening without showing interest or joining the conversation."},
+ {c:"listen", q:"While his manager explains a new task, Obaid keeps checking his phone. Later, he does not know the deadline. How was Obaid?",
+  o:["Distracted","Engaged","Constructive","Fluent"], a:0,
+  h:"He was not concentrating.",
+  e:"Distracted means not concentrating and not paying attention. His phone took his attention away from the manager."},
+ {c:"listen", q:"During a workshop, which student looks disengaged?",
+  o:["Salama, who leans forward and takes notes","Jassim, who asks the trainer a question","Mozah, who yawns and looks at her watch","Majid, who shares an idea with his group"], a:2,
+  h:"Disengaged means uninterested and uninvolved.",
+  e:"Mozah looks disengaged: uninterested and uninvolved. The other three are engaged: interested and involved."},
+ {c:"listen", q:"Your team leader says, \"Send the report by the end of the day.\" You are not sure if she means 3 pm or 5 pm. What is the best thing to do?",
+  o:["Say nothing and guess the time","Send it next morning to be safe","Ask a classmate what they think","Ask her to clarify: \"Do you mean 3 pm or 5 pm?\""], a:3,
+  h:"Active listeners ask questions to make things clear.",
+  e:"To clarify means to make something clear. Asking a short question is part of active listening."},
+ {c:"listen", q:"Mohammed sees a mistake in the group slides. He thinks, \"Someone else will fix it,\" and does nothing. How is he behaving?",
+  o:["Active","Passive","Constructive","Specific"], a:1,
+  h:"He lets it happen and does not try to change it.",
+  e:"Passive means not doing anything, or letting things happen without trying to change them. Active is the opposite."},
+
+ {c:"stress", q:"Mahra says, \"I didn't take YOUR pen.\" She stresses the word YOUR. What does she mean?",
+  o:["She did not take any pen at all.","Someone else took your pen.","She took a pen, but not yours.","She only borrowed your pen."], a:2,
+  h:"The stressed word shows what she is correcting.",
+  e:"Sentence stress changes meaning. Stressing YOUR means: it was a pen, but not your pen."},
+ {c:"stress", q:"In most English sentences, which words are usually stressed?",
+  o:["Content words, like need, report and Monday","Grammar words, like the, on and a","Only the first word in the sentence","Only the last word in the sentence"], a:0,
+  h:"Which words carry the most meaning?",
+  e:"Content words are often stressed and grammar words are often unstressed, but the rules can change when a speaker wants to show a special meaning."},
+ {c:"stress", q:"In her talk, Aysha slows down and says a little louder, \"This is the MOST important step.\" What is she doing?",
+  o:["Hesitating","Emphasizing the key point","Listening passively","Giving peer feedback"], a:1,
+  h:"She wants to show how important something is.",
+  e:"To emphasize means to focus on something and show how important it is. Pitch, pace and pausing help with emphasis."}
+];
+
+/* ============ HELPERS (ES5) ============ */
+function $(id){return document.getElementById(id);}
+function show(el){el.className=el.className.replace(/\s*hidden/g,"");}
+function hide(el){if(!/(^|\s)hidden(\s|$)/.test(el.className)){el.className=(el.className+" hidden").replace(/^\s+/,"");}}
+function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
+function screen(id){
+ var all=["scrStart","scrGloss","scrQuiz","scrRes"];
+ for(var i=0;i<all.length;i++){ if(all[i]===id){show($(all[i]));}else{hide($(all[i]));} }
+ try{window.scrollTo(0,0);}catch(e){}
+}
+var LETTERS=["A","B","C","D"];
+
+/* ============ HERO: SENTENCE STRESS ============ */
+function buildStress(){
+ var html="";
+ for(var i=0;i<STRESS.length;i++){
+  html+='<button class="sw" data-i="'+i+'">'+esc(STRESS[i].w)+'</button> ';
+ }
+ $("sentence").innerHTML=html;
+ var btns=$("sentence").getElementsByTagName("button");
+ for(var j=0;j<btns.length;j++){
+  btns[j].onclick=function(){
+   var k=parseInt(this.getAttribute("data-i"),10);
+   for(var m=0;m<btns.length;m++){btns[m].className="sw";}
+   this.className="sw on";
+   $("meaning").innerHTML=STRESS[k].m;
+  };
+ }
+}
+
+/* ============ GLOSSARY ============ */
+var curGroup="all";
+function buildChips(){
+ var html="";
+ for(var i=0;i<GROUPS.length;i++){
+  html+='<button class="chip'+(GROUPS[i].k===curGroup?" on":"")+'" data-k="'+GROUPS[i].k+'">'+esc(GROUPS[i].n)+'</button>';
+ }
+ $("chips").innerHTML=html;
+ var b=$("chips").getElementsByTagName("button");
+ for(var j=0;j<b.length;j++){
+  b[j].onclick=function(){curGroup=this.getAttribute("data-k");buildChips();buildGrid();};
+ }
+}
+function cardFront(t){
+ return '<span class="wk">'+esc(t.w)+'</span><span class="term">'+esc(t.t)+'</span><span class="pos">'+esc(t.p)+'</span><span class="tapNote">Tap to see the meaning</span>';
+}
+function cardBack(t){
+ return '<span class="term" style="font-size:17px;margin-bottom:6px">'+esc(t.t)+'</span><span class="def">'+esc(t.d)+'</span><span class="ar"><b>'+esc(t.at)+'</b> – '+esc(t.ad)+'</span>';
+}
+function buildGrid(){
+ var html="";
+ for(var i=0;i<TERMS.length;i++){
+  var t=TERMS[i];
+  if(curGroup!=="all" && t.g!==curGroup){continue;}
+  html+='<div class="fc"><button class="fcIn front" data-i="'+i+'" data-s="f">'+cardFront(t)+'</button></div>';
+ }
+ $("grid").innerHTML=html;
+ var b=$("grid").getElementsByTagName("button");
+ for(var j=0;j<b.length;j++){
+  b[j].onclick=function(){
+   var t=TERMS[parseInt(this.getAttribute("data-i"),10)];
+   if(this.getAttribute("data-s")==="f"){
+    this.setAttribute("data-s","b");this.className="fcIn back";this.innerHTML=cardBack(t);
+   }else{
+    this.setAttribute("data-s","f");this.className="fcIn front";this.innerHTML=cardFront(t);
+   }
+  };
+ }
+}
+
+/* ============ QUIZ ============ */
+var cur=0, answers=[], streak=0, bestStreak=0, reviewMode=false;
+function resetQuiz(){
+ cur=0;answers=[];streak=0;bestStreak=0;reviewMode=false;
+ for(var i=0;i<QS.length;i++){answers.push({sel:-1,hint:false,pts:0,ok:false});}
+}
+function totalScore(){var s=0;for(var i=0;i<answers.length;i++){s+=answers[i].pts;}return s;}
+function answeredCount(){var n=0;for(var i=0;i<answers.length;i++){if(answers[i].sel>-1){n++;}}return n;}
+
+function renderQ(){
+ var q=QS[cur], a=answers[cur], done=a.sel>-1;
+ $("qNum").innerHTML="Question "+(cur+1)+" of "+QS.length;
+ $("score").innerHTML=totalScore()+" points";
+ $("streak").innerHTML="Streak "+streak;
+ $("barFill").style.width=Math.round(answeredCount()/QS.length*100)+"%";
+ $("qCat").className="cat c-"+q.c;
+ $("qCat").innerHTML=esc(CATS[q.c].n);
+ $("qText").innerHTML=esc(q.q);
+ var html="";
+ for(var i=0;i<q.o.length;i++){
+  var cls="opt";
+  if(done){cls+=" locked"; if(i===q.a){cls+=" right";} else if(i===a.sel){cls+=" wrong";}}
+  html+='<button class="'+cls+'" data-i="'+i+'"'+(done?' disabled':'')+'><span class="let">'+LETTERS[i]+'</span>'+esc(q.o[i])+'</button>';
+ }
+ $("opts").innerHTML=html;
+ var b=$("opts").getElementsByTagName("button");
+ for(var j=0;j<b.length;j++){b[j].onclick=function(){choose(parseInt(this.getAttribute("data-i"),10));};}
+
+ if(a.hint){$("hintBox").innerHTML="<b>Hint:</b> "+esc(q.h);show($("hintBox"));}else{hide($("hintBox"));}
+ $("hintBtn").disabled=(done||a.hint);
+ if(done){
+  $("fb").innerHTML='<div class="fb '+(a.ok?"good":"bad")+'"><b>'+(a.ok?"Correct! +"+a.pts+" points. ":"Not this time. The answer is "+LETTERS[q.a]+". ")+'</b>'+esc(q.e)+'</div>';
+ }else{$("fb").innerHTML="";}
+ if(done && (reviewMode || cur<firstUnanswered())){show($("reviewNote"));}else{hide($("reviewNote"));}
+ $("prevBtn").disabled=(cur===0);
+ $("nextBtn").disabled=!done;
+ $("nextBtn").innerHTML=(cur===QS.length-1)?(reviewMode?"Back to results":"See my results"):"Next";
+}
+function firstUnanswered(){for(var i=0;i<answers.length;i++){if(answers[i].sel<0){return i;}}return answers.length;}
+function choose(i){
+ var a=answers[cur]; if(a.sel>-1){return;}
+ a.sel=i; a.ok=(i===QS[cur].a);
+ if(a.ok){a.pts=a.hint?5:10;streak++;if(streak>bestStreak){bestStreak=streak;}}else{a.pts=0;streak=0;}
+ renderQ();
+}
+function useHint(){var a=answers[cur];if(a.sel>-1||a.hint){return;}a.hint=true;renderQ();}
+function nextQ(){
+ if(answers[cur].sel<0){return;}
+ if(cur<QS.length-1){cur++;renderQ();}
+ else{showResults();}
+}
+function prevQ(){if(cur>0){cur--;renderQ();}}
+
+/* ============ RESULTS ============ */
+var PASS=200;
+function catStats(){
+ var s={};
+ for(var k in CATS){if(CATS.hasOwnProperty(k)){s[k]={n:0,ok:0};}}
+ for(var i=0;i<QS.length;i++){s[QS[i].c].n++; if(answers[i].ok){s[QS[i].c].ok++;}}
+ return s;
+}
+function earnedBadges(){
+ var s=catStats(), out=[];
+ for(var k in CATS){if(CATS.hasOwnProperty(k) && s[k].ok===s[k].n){out.push(CATS[k].badge);}}
+ if(bestStreak>=5){out.push("On a Roll");}
+ var noHint=true;for(var i=0;i<answers.length;i++){if(answers[i].hint){noHint=false;}}
+ if(noHint && totalScore()>=PASS){out.push("No Hints Needed");}
+ return out;
+}
+function showResults(){
+ reviewMode=true;
+ var sc=totalScore(), max=QS.length*10, pct=Math.round(sc/max*100), pass=sc>=PASS;
+ var name=$("stName").value.replace(/^\s+|\s+$/g,"");
+ $("resTitle").innerHTML=pass?"Well done, "+esc(name)+"!":"Good effort, "+esc(name)+".";
+ $("resPct").innerHTML=pct+"%";
+ var right=0;for(var i=0;i<answers.length;i++){if(answers[i].ok){right++;}}
+ $("resLine").innerHTML="You scored <b>"+sc+" out of "+max+"</b> points and answered "+right+" of "+QS.length+" questions correctly. "+(pass?"You earned your certificate.":"You need 200 points for the certificate. Study the glossary and try again.");
+ var s=catStats(), got=earnedBadges(), html="";
+ for(var k in CATS){ if(CATS.hasOwnProperty(k)){
+  var has=s[k].ok===s[k].n;
+  html+='<div class="badge"><div class="bIn'+(has?" got":"")+'"><span class="ic">'+CATS[k].ic+'</span><b>'+CATS[k].badge+'</b><small>'+esc(CATS[k].n)+': '+s[k].ok+'/'+s[k].n+'</small></div></div>';
+ }}
+ html+='<div class="badge"><div class="bIn'+(bestStreak>=5?" got":"")+'"><span class="ic">🔥</span><b>On a Roll</b><small>5 correct in a row (best: '+bestStreak+')</small></div></div>';
+ $("badges").innerHTML=html;
+ if(pass){
+  $("certName").innerHTML=esc(name);
+  $("certScore").innerHTML="Score: "+sc+"/"+max+" ("+pct+"%)";
+  $("certDate").innerHTML=new Date().toDateString();
+  show($("certBox"));show($("printBtn"));
+ }else{hide($("certBox"));hide($("printBtn"));}
+ hide($("jsonWrap"));
+ screen("scrRes");
+ if(pass){confetti();}
+}
+function resultJSON(){
+ var sc=totalScore(), max=QS.length*10, list=[];
+ for(var i=0;i<QS.length;i++){
+  list.push({question:i+1, category:CATS[QS[i].c].n, chosen:answers[i].sel>-1?QS[i].o[answers[i].sel]:"", correctAnswer:QS[i].o[QS[i].a], correct:answers[i].ok, hintUsed:answers[i].hint, points:answers[i].pts});
+ }
+ return JSON.stringify({
+  app:"LSC 1503 Unit 1 Key Language Weeks 4-5: Reflect, Give Feedback, Listen",
+  student:$("stName").value, studentId:$("stId").value, date:new Date().toString(),
+  score:sc, maxScore:max, percent:Math.round(sc/max*100), passed:sc>=PASS,
+  bestStreak:bestStreak, badges:earnedBadges(), answers:list
+ },null,2);
+}
+function download(){
+ var txt=resultJSON();
+ $("jsonOut").value=txt; show($("jsonWrap"));
+ try{
+  var nm=($("stName").value||"student").replace(/[^A-Za-z0-9]+/g,"_");
+  var blob=new Blob([txt],{type:"application/json"});
+  if(window.navigator && window.navigator.msSaveOrOpenBlob){window.navigator.msSaveOrOpenBlob(blob,"LSC1503_Wk4-5_"+nm+".json");return;}
+  var url=URL.createObjectURL(blob), a=document.createElement("a");
+  a.href=url;a.download="LSC1503_Wk4-5_"+nm+".json";document.body.appendChild(a);a.click();
+  setTimeout(function(){document.body.removeChild(a);URL.revokeObjectURL(url);},500);
+ }catch(e){}
+}
+
+/* ============ CONFETTI ============ */
+function confetti(){
+ var cv=$("confetti"); if(!cv.getContext){return;}
+ try{ if(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches){return;} }catch(e){}
+ var ctx=cv.getContext("2d"), W=cv.width=window.innerWidth, H=cv.height=window.innerHeight;
+ var cols=["#F25C45","#FFC84A","#0E7C66","#2F6FB5","#8A4FB0"], p=[], i;
+ for(i=0;i<140;i++){p.push({x:Math.random()*W,y:-Math.random()*H,s:5+Math.random()*7,v:2+Math.random()*4,d:Math.random()*2-1,c:cols[i%cols.length],r:Math.random()*6});}
+ var t=0;
+ var raf=window.requestAnimationFrame||function(f){return setTimeout(f,16);};
+ function step(){
+  ctx.clearRect(0,0,W,H);
+  for(var k=0;k<p.length;k++){var o=p[k];o.y+=o.v;o.x+=o.d;o.r+=0.1;ctx.fillStyle=o.c;ctx.save();ctx.translate(o.x,o.y);ctx.rotate(o.r);ctx.fillRect(-o.s/2,-o.s/2,o.s,o.s*0.6);ctx.restore();}
+  t++; if(t<220){raf(step);}else{ctx.clearRect(0,0,W,H);}
+ }
+ step();
+}
+
+/* ============ WIRING ============ */
+function needName(){
+ if(!$("stName").value.replace(/\s+/g,"")){show($("nameWarn"));$("stName").focus();return true;}
+ hide($("nameWarn"));return false;
+}
+function startQuiz(){if(needName()){screen("scrStart");return;}resetQuiz();renderQ();screen("scrQuiz");}
+
+$("goGloss").onclick=function(){screen("scrGloss");};
+$("glossBack").onclick=function(){screen("scrStart");};
+$("goQuiz").onclick=startQuiz;
+$("glossQuiz").onclick=startQuiz;
+$("hintBtn").onclick=useHint;
+$("nextBtn").onclick=nextQ;
+$("prevBtn").onclick=prevQ;
+$("dlBtn").onclick=download;
+$("printBtn").onclick=function(){window.print();};
+$("reviewBtn").onclick=function(){cur=0;renderQ();screen("scrQuiz");};
+$("retryBtn").onclick=function(){hide($("certBox"));startQuiz();};
+
+buildStress();buildChips();buildGrid();resetQuiz();
+$("jsError").style.display="none";
+window.onerror=function(){$("jsError").style.display="block";};
+</script>
+</body>
+</html>
